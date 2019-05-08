@@ -12,14 +12,14 @@
 
 ### Or download the project zip file
 
-You can download the zip file from Github by opening https://github.com/jeremyrdavis/insult-starter-springboot
+You can download the zip file from Github by opening https://github.com/jeremyrdavis/insult-starter-nodejs
 and choosing, "Download ZIP" from the green, "Clone or Download" button
 
 ![](./images/lab7/lab7-sb-01-download.png)  
 
 ### Rename the folder
 
-Rename the folder from "insult-starter-nodejs" to "insult-nouns"
+Rename the folder from "insult-starter-nodejs" to "insult-service"
 
 ### Import the app into VS Code
 
@@ -28,18 +28,6 @@ Open Visual Studio Code, choose "Open," and navigate to the root folder of the p
 ### Update the package.json file
 
 Change the name to "insult-nouns"  from "insult-starter-nodejs":
-
-```json
-
-{
-  "name": "insult-service",
-  "version": "1.0.0",
-
-```
-
-### Update the package-lock.json file
-
-Change the name to "insult-service"  from "insult-starter-nodejs":
 
 ```json
 
@@ -90,7 +78,7 @@ Paste and enter the command into your terminal
 ### Validating the deployment:  
 
 1. Login to OpenShift Console - with your user name and password
-2. Click on Project ‘red-hat-summit-2019’ if you are not already in that project
+2. Click on Project ‘userN-insult-app’ if you are not already in that project
 3. You should see 1 running pod and a url that you can access
 4. Try the url
 
@@ -103,7 +91,7 @@ You should see:
 
 ## Get coding!
 
-### Create and fail a JUnit Test for our endpoint
+### Create and fail a Test for our endpoint
 
 We are of course practicing TDD in this tutorial so our first step will be to write a Unit Test.  Create a new file, "insult-test.js," in the "test" directory with the following content:
 
@@ -148,7 +136,6 @@ Add the following method to app.js:
 ```javascript
 
 app.use('/api/insult', (request, response) => {
-  const name = request.query ? request.query.name : undefined;
   response.send({content: `Verily, ye be a malmsey-nosed, unmuzzled whey-face!`});
 });
 
@@ -171,7 +158,7 @@ Of course we aren't actually doing anything.
 
 ## Pass our test
 
-Let's create 2 new services to retrieve adjectives and a noun.  Create a "lib" folder in the project directory.  Add a file, "adjective-service.js" with the following content:
+Let's create 2 new modules to retrieve adjectives and a noun.  Create a "lib" folder in the project directory.  Add a file, "adjective-service.js" with the following content:
 
 ```javascript
 
@@ -229,7 +216,7 @@ module.exports = exports = {
 
 ### Update our App
 
-Import the 2 services in App.js:
+Import the 2 modules in App.js:
 
 ```javascript
 
