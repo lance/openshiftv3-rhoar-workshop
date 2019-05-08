@@ -37,18 +37,6 @@ Change the name to "insult-nouns"  from "insult-starter-nodejs":
 
 ```
 
-### Update the package-lock.json file
-
-Change the name to "insult-nouns"  from "insult-starter-nodejs":
-
-```json
-
-{
-  "name": "insult-nouns",
-  "version": "1.0.0",
-
-```
-
 ### Build and run
 
 Open a Terminal from Visual Studio Code by choosing "Terminal -> New Terminal" from the menu.  Run npm install and npm start:
@@ -90,7 +78,7 @@ Paste and enter the command into your terminal
 ### Validating the deployment:  
 
 1. Login to OpenShift Console - with your user name and password
-2. Click on Project ‘red-hat-summit-2019’ if you are not already in that project
+2. Click on Project ‘userN-insult-app’ if you are not already in that project
 3. You should see 1 running pod and a url that you can access
 4. Try the url
 
@@ -103,20 +91,16 @@ You should see:
 
 ## Get coding!
 
-### Create and fail a JUnit Test for our endpoint
+### Create and fail a test for our endpoint
 
-We are of course practicing TDD in this tutorial so our first step will be to write a Unit Test.  Create a new class, "TwitterServiceTest.java," in the "src/test/java/com/redhat/summit2019" directory with the following content:
+We are of course practicing TDD in this tutorial so our first step will be to write a Unit Test. Add a new 
+test to `test/greeting-test.js` with the following content:
 
 ```javascript
 
-const test = require('tape');
-const supertest = require('supertest');
-
-const app = require('../app');
-
 test('test noun', t => {
   supertest(app)
-    .get('/api/greeting')
+    .get('/api/noun')
     .expect('Content-Type', /json/)
     .expect(200)
     .then(response => {
@@ -134,30 +118,6 @@ test('test noun', t => {
 ```
 
 Your test should of course fail.  If it doesn't feel free to raise your hand and ask for help
-
-```bash
-
-> insult-nouns@1.0.0 test /insults-nouns
-> tape test/*.js | tap-spec
-
-
-  test noun
-
-    ✔ should not be equal
-
-  test out greeting route with no query param
-
-    ✔ should be equal
-
-  test out greeting route with a query param
-
-    ✔ should be equal
-
-
-  total:     3
-  passing:   3
-  duration:  161ms
-```
 
 ### Stub out an noun method
 

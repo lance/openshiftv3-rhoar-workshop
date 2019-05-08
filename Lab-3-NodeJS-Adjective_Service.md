@@ -103,7 +103,7 @@ You should see:
 
 ## Get coding!
 
-### Create and fail a JUnit Test for our endpoint
+### Create and fail a test for our endpoint
 
 We are of course practicing TDD in this tutorial so our first step will be to write a Unit Test.  Create a new test
 in test/greeting-test.js with the following content:
