@@ -12,7 +12,7 @@ git clone https://github.com/jeremyrdavis/insult-starter-nodejs.git
 
 ### Or download the project zip file
 
-You can download the zip file from Github by opening https://github.com/jeremyrdavis/insult-starter-springboot
+You can download the zip file from Github by opening https://github.com/jeremyrdavis/insult-starter-nodejs
 and choosing, "Download ZIP" from the green, "Clone or Download" button
 
 ![](./images/lab7/lab7-sb-01-download.png)  
@@ -90,7 +90,7 @@ Paste and enter the command into your terminal
 ### Validating the deployment:  
 
 1. Login to OpenShift Console - with your user name and password
-2. Click on Project ‘red-hat-summit-2019’ if you are not already in that project
+2. Click on Project ‘userN-insult-app’ if you are not already in that project
 3. You should see 1 running pod and a url that you can access
 4. Try the url
 
@@ -105,18 +105,14 @@ You should see:
 
 ### Create and fail a JUnit Test for our endpoint
 
-We are of course practicing TDD in this tutorial so our first step will be to write a Unit Test.  Create a new class, "TwitterServiceTest.java," in the "src/test/java/com/redhat/summit2019" directory with the following content:
+We are of course practicing TDD in this tutorial so our first step will be to write a Unit Test.  Create a new test
+in test/greeting-test.js with the following content:
 
 ```javascript
 
-const test = require('tape');
-const supertest = require('supertest');
-
-const app = require('../app');
-
 test('test adjective', t => {
   supertest(app)
-    .get('/api/greeting')
+    .get('/api/adjective')
     .expect('Content-Type', /json/)
     .expect(200)
     .then(response => {
@@ -135,29 +131,6 @@ test('test adjective', t => {
 
 Your test should of course fail.  If it doesn't feel free to raise your hand and ask for help
 
-```bash
-
-> insult-adjectives@1.0.0 test /insults-adjectives
-> tape test/*.js | tap-spec
-
-
-  test adjective
-
-    ✔ should not be equal
-
-  test out greeting route with no query param
-
-    ✔ should be equal
-
-  test out greeting route with a query param
-
-    ✔ should be equal
-
-
-  total:     3
-  passing:   3
-  duration:  161ms
-```
 
 ### Stub out an adjective method
 
@@ -166,7 +139,6 @@ Add the following method to app.js:
 ```javascript
 
 app.use('/api/adjective', (request, response) => {
-  const name = request.query ? request.query.name : undefined;
   response.send({content: `Verily, ye be a malmsey-nosed, unmuzzled whey-face!`});
 });
 
@@ -232,7 +204,7 @@ Import the db functionality at the top of app.js:
 
 ```
 
-Create a new method to return adjectives:
+Change the `/api/adjectives` route you just stubbed out to return adjectives from the database:
 
 ```javascript
 
